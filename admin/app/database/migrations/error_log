@@ -1,0 +1,2 @@
+[12-Jan-2015 22:36:14 UTC] PHP Fatal error:  Class 'Illuminate\Database\Migrations\Migration' not found in /home/efuncore/public_html/atms/app/database/migrations/2014_12_30_101609_create_password_reminders_table.php on line 6
+[09-Mar-2015 04:50:53 UTC] PHP Fatal error:  Class 'Illuminate\Database\Migrations\Migration' not found in /home/efuncore/public_html/admin/app/database/migrations/2014_12_30_101609_create_password_reminders_table.php on line 6

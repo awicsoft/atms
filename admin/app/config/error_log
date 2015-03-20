@@ -1,0 +1,15 @@
+[20-Feb-2015 16:18:45 UTC] PHP Fatal error:  Call to undefined function storage_path() in /home/efuncore/public_html/atms/app/config/app.php on line 138
+[20-Feb-2015 16:18:46 UTC] PHP Fatal error:  Call to undefined function storage_path() in /home/efuncore/public_html/atms/app/config/cache.php on line 31
+[20-Feb-2015 16:18:46 UTC] PHP Fatal error:  Call to undefined function storage_path() in /home/efuncore/public_html/atms/app/config/app.php on line 138
+[20-Feb-2015 16:18:46 UTC] PHP Fatal error:  Call to undefined function storage_path() in /home/efuncore/public_html/atms/app/config/cache.php on line 31
+[20-Feb-2015 16:18:47 UTC] PHP Fatal error:  Call to undefined function storage_path() in /home/efuncore/public_html/atms/app/config/session.php on line 47
+[20-Feb-2015 16:18:48 UTC] PHP Fatal error:  Call to undefined function storage_path() in /home/efuncore/public_html/atms/app/config/session.php on line 47
+[02-Mar-2015 18:11:54 UTC] PHP Fatal error:  Call to undefined function storage_path() in /home/efuncore/public_html/atms/app/config/app.php on line 138
+[02-Mar-2015 18:12:14 UTC] PHP Fatal error:  Call to undefined function storage_path() in /home/efuncore/public_html/atms/app/config/cache.php on line 31
+[02-Mar-2015 18:13:44 UTC] PHP Fatal error:  Call to undefined function storage_path() in /home/efuncore/public_html/atms/app/config/session.php on line 47
+[09-Mar-2015 04:43:40 UTC] PHP Fatal error:  Call to undefined function storage_path() in /home/efuncore/public_html/admin/app/config/app.php on line 138
+[09-Mar-2015 04:43:59 UTC] PHP Fatal error:  Call to undefined function storage_path() in /home/efuncore/public_html/admin/app/config/cache.php on line 31
+[09-Mar-2015 04:44:30 UTC] PHP Fatal error:  Call to undefined function storage_path() in /home/efuncore/public_html/admin/app/config/session.php on line 47
+[11-Mar-2015 21:07:22 UTC] PHP Fatal error:  Call to undefined function storage_path() in /home/efuncore/public_html/admin/app/config/app.php on line 138
+[12-Mar-2015 12:16:51 UTC] PHP Fatal error:  Call to undefined function storage_path() in /home/efuncore/public_html/admin/app/config/cache.php on line 31
+[12-Mar-2015 19:23:24 UTC] PHP Fatal error:  Call to undefined function storage_path() in /home/efuncore/public_html/admin/app/config/session.php on line 47

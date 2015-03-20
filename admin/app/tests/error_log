@@ -1,0 +1,8 @@
+[20-Feb-2015 16:18:59 UTC] PHP Fatal error:  Class 'TestCase' not found in /home/efuncore/public_html/atms/app/tests/ExampleTest.php on line 3
+[20-Feb-2015 16:18:59 UTC] PHP Fatal error:  Class 'Illuminate\Foundation\Testing\TestCase' not found in /home/efuncore/public_html/atms/app/tests/TestCase.php on line 3
+[20-Feb-2015 16:18:59 UTC] PHP Fatal error:  Class 'TestCase' not found in /home/efuncore/public_html/atms/app/tests/ExampleTest.php on line 3
+[20-Feb-2015 16:18:59 UTC] PHP Fatal error:  Class 'Illuminate\Foundation\Testing\TestCase' not found in /home/efuncore/public_html/atms/app/tests/TestCase.php on line 3
+[09-Mar-2015 04:44:33 UTC] PHP Fatal error:  Class 'Illuminate\Foundation\Testing\TestCase' not found in /home/efuncore/public_html/admin/app/tests/TestCase.php on line 3
+[09-Mar-2015 04:44:53 UTC] PHP Fatal error:  Class 'TestCase' not found in /home/efuncore/public_html/admin/app/tests/ExampleTest.php on line 3
+[12-Mar-2015 20:39:11 UTC] PHP Fatal error:  Class 'Illuminate\Foundation\Testing\TestCase' not found in /home/efuncore/public_html/admin/app/tests/TestCase.php on line 3
+[13-Mar-2015 06:46:14 UTC] PHP Fatal error:  Class 'TestCase' not found in /home/efuncore/public_html/admin/app/tests/ExampleTest.php on line 3

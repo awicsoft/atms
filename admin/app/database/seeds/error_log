@@ -1,0 +1,2 @@
+[05-Jan-2015 20:02:08 UTC] PHP Fatal error:  Class 'Seeder' not found in /home/efuncore/public_html/atms/app/database/seeds/DatabaseSeeder.php on line 3
+[09-Mar-2015 04:49:49 UTC] PHP Fatal error:  Class 'Seeder' not found in /home/efuncore/public_html/admin/app/database/seeds/DatabaseSeeder.php on line 3
