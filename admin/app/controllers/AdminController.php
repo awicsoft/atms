@@ -1,5 +1,5 @@
 <?php
-//usama
+//usa
 class AdminController extends UserController{
 
 
