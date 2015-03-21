@@ -1,7 +1,26 @@
 <?php
 require_once 'GoogleAnalyticsAPI.class.php';
 class AnalyticsController extends BaseController {
-function exp2dec($number) {
+var $client_id;
+var $client_secret;
+var  $redirect_uri;
+var $account_id ;
+function intializing(){
+ $this->client_id = '505061060366-m4h0ohvmsohbg3qsfce2nb37ie4vocqu.apps.googleusercontent.com';
+    
+    // From the APIs console
+ $this->client_secret = 'qDE4vf7Hr7tjVObn79G6ppzn';
+    
+     // Url to your this page, must match the one in the APIs console
+    $this->redirect_uri = 'http://linkify.cash/analytics';
+
+    // Analytics account id like, 'ga:xxxxxxx'
+    $this->account_id = 'ga:76297430';
+    
+    
+}
+
+    function exp2dec($number) {
     preg_match('/(.*)E-(.*)/', str_replace(".", "", $number), $matches);
     $num = "0.";
     while ($matches[2] > 0) {
@@ -22,6 +41,32 @@ function analytics(){
    
     
 }
+function getAcessTokenWithRefreshToken(){
+      $refreshToken = Analytics::where('ID',2)->first()->rtoken;
+      $this->intializing();
+      
+      $date = [
+          'refresh_token' => $refreshToken,
+          'client_id' => $this->client_id,
+          'client_secret' =>$this->client_secret,
+          'grant_type' => 'refresh_token'
+              
+              ];  
+      
+      $request = new RequestController();
+      $data = $request->post("https://www.googleapis.com/oauth2/v3/token", $data);
+      if($date!='null')
+        return $date['access_token'];
+      
+      return $date;
+     
+}
+function refreshAcessToken(){
+      $token =  $this->getAcessTokenWithRefreshToken();
+      if($token != 'null')
+         Analytics::where('ID',1)->update(['token' =>$token]);
+      else echo "error";
+}
  function result()
 {
      $token = Analytics::where('ID',1)->first();
@@ -41,18 +86,18 @@ function analytics(){
      * Make sure to request your API-key first at: 
      *    https://console.developers.google.com
      */
-      
+      $this->intializing();
     // From the APIs console
-    $client_id = '505061060366-m4h0ohvmsohbg3qsfce2nb37ie4vocqu.apps.googleusercontent.com';
+  $client_id =  $this->client_id;
     
     // From the APIs console
-    $client_secret = 'qDE4vf7Hr7tjVObn79G6ppzn';
+  $client_secret =  $this->client_secret;
     
      // Url to your this page, must match the one in the APIs console
-    $redirect_uri = 'http://linkify.cash/analytics';
+    $redirect_uri = $this->redirect_uri ;
 
     // Analytics account id like, 'ga:xxxxxxx'
-    $account_id = 'ga:76297430';
+    $account_id =  $this->account_id;
     
    
   //  include('GoogleAnalyticsAPI.class.php');
