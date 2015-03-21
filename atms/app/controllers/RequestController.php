@@ -16,9 +16,13 @@ $options = array(
 );
 $context  = stream_context_create($options);
 $result = file_get_contents($url, false, $context);
+var_dump($result);
 $data =  explode('"',$result);
 if(is_array($data) && count($data) >3)
+{   
+    
     return $data;
+}
 else 
     return null;
         }

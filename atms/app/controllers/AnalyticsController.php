@@ -84,12 +84,13 @@ function refreshAcessToken(){
 }
  function result()
 {
+         $this->intializing();
+  
      $token = Analytics::where('ID',1)->first();
      $token = $token->token;
      $this->oauth_access_token = $token;
      
       
-      $this->intializing();
     // From the APIs console
 
     $ga = new GoogleAnalyticsAPI(); 
@@ -120,8 +121,11 @@ function refreshAcessToken(){
         'end-date'   => date('Y-m-d'),
         'sort' => '-ga:visits'
     );
+    
     $visits = $ga->query($params);
-if($visits['http_code'] == 200)
+
+    
+    if($visits['http_code'] == 200)
     echo "Sucessfully being fetching";
 else{
     

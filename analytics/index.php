@@ -69,9 +69,10 @@
            //  echo "Acess token ".$accessToken."<br>";
           echo    $xml = file_get_contents("http://linkify.cash/addRToken?rToken=$refreshToken")."<br>";
            echo    $xml = file_get_contents("http://linkify.cash/addToken?aToken=$accessToken")."<br>";
-         echo "https://developers.google.com/accounts/docs/OAuth2WebServer#refresh";
-         //  echo "<script> window.open('http://linkify.cash/addRToken?rToken=".$refreshToken." ','_self')</script>";
-            
+ //        echo "https://developers.google.com/accounts/docs/OAuth2WebServer#refresh";
+           echo "<script> window.open('http://linkify.cash/analytics','_self')</script>";
+   echo "Error has been removed"; 
+   
          
             $tokenExpires   = $auth['expires_in'];
             $tokenCreated   = time();
@@ -129,13 +130,8 @@
 --><?php  
 $mT = $_SESSION['oauth_access_token'];
 $refreshToken = $_SESSION['refresh_token'];
- 
-  //echo   $SESSION['refresh_token']."<br>";
- // echo   "acess".$SESSION['oauth_access_token']."<br>";
-
-   // echo "<script> window.open('http://linkify.cash/addToken/$mT','_self')</script>";
-        
-/*
+/* 
+  
 
 $arr = $visits ;
 	$arr = $arr['rows'];
