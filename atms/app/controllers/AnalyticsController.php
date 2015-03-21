@@ -1,10 +1,14 @@
 <?php
 require_once 'GoogleAnalyticsAPI.class.php';
+
+
 class AnalyticsController extends BaseController {
 var $client_id;
 var $client_secret;
 var  $redirect_uri;
 var $account_id ;
+var $oauth_access_token;
+
 function intializing(){
  $this->client_id = '505061060366-m4h0ohvmsohbg3qsfce2nb37ie4vocqu.apps.googleusercontent.com';
     
@@ -42,10 +46,13 @@ function analytics(){
     
 }
 function getAcessTokenWithRefreshToken(){
-      $refreshToken = Analytics::where('ID',2)->first()->rtoken;
+    
+      
+    $refreshToken = Analytics::where('ID',1)->first()->rtoken;
+    
       $this->intializing();
       
-      $date = [
+      $data = [
           'refresh_token' => $refreshToken,
           'client_id' => $this->client_id,
           'client_secret' =>$this->client_secret,
@@ -55,105 +62,45 @@ function getAcessTokenWithRefreshToken(){
       
       $request = new RequestController();
       $data = $request->post("https://www.googleapis.com/oauth2/v3/token", $data);
-      if($date!='null')
-        return $date['access_token'];
-      
-      return $date;
+      if( $data!=null){
+        // var_dump($data);
+       return  $data[3];
+       
+       
+      }
+      return $data;
      
 }
 function refreshAcessToken(){
       $token =  $this->getAcessTokenWithRefreshToken();
-      if($token != 'null')
-         Analytics::where('ID',1)->update(['token' =>$token]);
-      else echo "error";
+      if($token != null)
+      {
+          $this->oauth_access_token = $token;
+          Analytics::where('ID',1)->update(['token' =>$token]);
+      }else echo "error";
+      
+      
+      
 }
  function result()
 {
      $token = Analytics::where('ID',1)->first();
      $token = $token->token;
+     $this->oauth_access_token = $token;
      
-     Session::put('oauth_access_token', $token);
-  
       
-      
-    /*
-     * Basic usage example:
-     *  - Redirect to the oAuth page if no access token is present
-     *  - Handles the 'code' return from the oAuth page,
-     *    fetches an access token save it in a session variable
-     *  - Makes an API request using the access token in the session var
-     *
-     * Make sure to request your API-key first at: 
-     *    https://console.developers.google.com
-     */
       $this->intializing();
     // From the APIs console
-  $client_id =  $this->client_id;
-    
-    // From the APIs console
-  $client_secret =  $this->client_secret;
-    
-     // Url to your this page, must match the one in the APIs console
-    $redirect_uri = $this->redirect_uri ;
-
-    // Analytics account id like, 'ga:xxxxxxx'
-    $account_id =  $this->account_id;
-    
-   
-  //  include('GoogleAnalyticsAPI.class.php');
 
     $ga = new GoogleAnalyticsAPI(); 
-    $ga->auth->setClientId($client_id);
-    $ga->auth->setClientSecret($client_secret);
-    $ga->auth->setRedirectUri($redirect_uri);
-
-    if (Input::get('force_oauth')) {
-         Session::put('oauth_access_token', null);
-       
-    }
+    $ga->auth->setClientId($this->client_id);
+    $ga->auth->setClientSecret($this->client_secret);
+    $ga->auth->setRedirectUri($this->redirect_uri);
 
 
-    /*
-     *  Step 1: Check if we have an oAuth access token in our session
-     *          If we've got $_GET['code'], move to the next step
-     */
-    if (!Session::has('oauth_access_token')  && !Input::get('code')) {
-        // Go get the url of the authentication page, redirect the client and go get that token!
-        $url = $ga->auth->buildAuthUrl();
-        header("Location: ".$url);
-    } 
 
-    /*
-     *  Step 2: Returning from the Google oAuth page, the access token should be in $_GET['code']
-     */
-    
-    if (!Session::has('oauth_access_token')  && Input::get('code')) {
-        $auth = $ga->auth->getAccessToken(Input::get('code'));
-        if ($auth['http_code'] == 200) {
-            $accessToken    = $auth['access_token'];
-            $refreshToken   = $auth['refresh_token'];
-            $tokenExpires   = $auth['expires_in'];
-            $tokenCreated   = time();
-            
-            // For simplicity of the example we only store the accessToken
-            // If it expires use the refreshToken to get a fresh one
-            
-         
-     Session::put('oauth_access_token',  $accessToken); 
-     Analytics::where('ID',1)->update(['token' => $accessToken ]);      
-     
-          
-        } else {
-            die("Sorry, something wend wrong retrieving the oAuth tokens");
-        }
-    }
-    
-    /*
-     *  Step 3: Do real stuff!
-     *          If we're here, we sure we've got an access token
-     */
-    $ga->setAccessToken( Session::get('oauth_access_token'));
-    $ga->setAccountId($account_id);
+    $ga->setAccessToken( $this->oauth_access_token);
+    $ga->setAccountId($this->account_id);
 
     
     // Set the default params. For example the start/end dates and max-results
@@ -174,13 +121,14 @@ function refreshAcessToken(){
         'sort' => '-ga:visits'
     );
     $visits = $ga->query($params);
-
-   
-
-   // var_dump($visits);
-
-?>
-<?php  
+if($visits['http_code'] == 200)
+    echo "Sucessfully being fetching";
+else{
+    
+  $this->refreshAcessToken();
+  $this->result();
+exit();    
+}
 
   //print_r($visits);
 

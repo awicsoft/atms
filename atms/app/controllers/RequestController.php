@@ -4,21 +4,24 @@ class RequestController extends BaseController{
 
 function post($url,$data){
         
-        $r = new HttpRequest($url, HttpRequest::METH_POST);
-        $r->setOptions(array('cookies' => array('lang' => 'de')));
-        $r->addPostFields($data);
-       // $r->addPostFile('image', 'profile.jpg', 'image/jpeg');
-       
-        try {
-               return $r->send()->getBody();
-           
-             } catch (HttpException $ex) {
-                   echo $ex;
-                   return 'null';
-              }
+    
 
-  }
-  
+// use key 'http' even if you send the request to https://...
+$options = array(
+    'http' => array(
+        'header'  => "Content-type: application/x-www-form-urlencoded",
+        'method'  => 'POST',
+        'content' => http_build_query($data),
+    ),
+);
+$context  = stream_context_create($options);
+$result = file_get_contents($url, false, $context);
+$data =  explode('"',$result);
+if(is_array($data) && count($data) >3)
+    return $data;
+else 
+    return null;
+        }
 }
 
 ?> 
